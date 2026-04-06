@@ -342,11 +342,16 @@ with st.sidebar:
     st.markdown("---")
 
     st.markdown("#### 🔑 Configuração de API")
+    # Lê do Streamlit Secrets automaticamente; permite override manual
+    _secret_key = st.secrets.get("NEWSAPI_KEY", "") if hasattr(st, "secrets") else ""
     newsapi_key = st.text_input(
         "NewsAPI Key (opcional)",
+        value=_secret_key,
         type="password",
-        help="Obtenha grátis em newsapi.org para resultados extras"
+        help="Configure via Streamlit Secrets (NEWSAPI_KEY) ou insira manualmente"
     )
+    if _secret_key and not newsapi_key:
+        newsapi_key = _secret_key
 
     st.markdown("---")
     st.markdown("#### 🔍 Filtros de Busca")
