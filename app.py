@@ -16,382 +16,228 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS — RB Asset Visual Identity ──────────────────────────────────────
+# ── Custom CSS — RB Asset Visual Identity (refined) ────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Barlow+Condensed:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap');
 
 :root {
-    --forest:      #152a13;
-    --forest-mid:  #1e3d1b;
-    --lime:        #6abf2e;
-    --lime-bright: #7ed636;
-    --lime-dim:    #3d7019;
-    --ink:         #0b0f0a;
-    --surface:     #111a10;
-    --card:        #182616;
-    --card-hover:  #1f3320;
-    --border:      #243d21;
-    --text-main:   #e8f0e6;
-    --text-muted:  #7a9977;
-    --text-dim:    #4a6647;
-    --white:       #ffffff;
+    --bg-base:      #0a1209;
+    --bg-surface:   #0f1a0e;
+    --bg-card:      #152614;
+    --bg-card-hov:  #1a3020;
+    --border:       #1e3320;
+    --border-mid:   #2a4a22;
+    --lime:         #5ab527;
+    --lime-bright:  #7ed646;
+    --lime-dim:     #3d6032;
+    --lime-muted:   #2d4d25;
+    --text-primary: #d4e8bc;
+    --text-sec:     #6a9e55;
+    --text-dim:     #3d6032;
+    --text-faint:   #2a4020;
+    --risk:         #ef4444;
+    --risk-bg:      #3d1414;
+    --risk-border:  #5c1e1e;
+    --risk-text:    #f87171;
 }
 
-/* ── Global reset ── */
 html, body, [class*="css"] {
-    font-family: 'Barlow', sans-serif;
-    background-color: var(--ink) !important;
-    color: var(--text-main) !important;
+    font-family: 'Inter', sans-serif !important;
+    background-color: var(--bg-base) !important;
+    color: var(--text-primary) !important;
 }
-
-/* ── App background ── */
-.stApp {
-    background-color: var(--ink) !important;
-}
-.block-container {
-    padding-top: 1.5rem !important;
-    max-width: 1100px;
-}
+.stApp { background-color: var(--bg-base) !important; }
+.block-container { padding-top: 1.5rem !important; max-width: 1100px; }
 
 /* ── Sidebar ── */
 [data-testid="stSidebar"] {
-    background: var(--forest) !important;
+    background: var(--bg-base) !important;
     border-right: 1px solid var(--border) !important;
 }
-[data-testid="stSidebar"] * {
-    color: var(--text-main) !important;
-}
-[data-testid="stSidebar"] .stTextInput > div > div > input {
-    background: rgba(255,255,255,0.05) !important;
-    border: 1px solid var(--border) !important;
-    color: var(--text-main) !important;
-    border-radius: 4px !important;
-}
+[data-testid="stSidebar"] * { color: var(--text-primary) !important; }
+[data-testid="stSidebar"] label { color: var(--text-sec) !important; font-size: 0.78rem !important; letter-spacing: 0.06em; text-transform: uppercase; }
+[data-testid="stSidebar"] .stTextInput > div > div > input,
 [data-testid="stSidebar"] .stSelectbox > div > div,
 [data-testid="stSidebar"] .stMultiSelect > div > div {
-    background: rgba(255,255,255,0.05) !important;
-    border: 1px solid var(--border) !important;
-    color: var(--text-main) !important;
-    border-radius: 4px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-mid) !important;
+    color: var(--text-primary) !important;
+    border-radius: 8px !important;
+    font-size: 0.85rem !important;
 }
-[data-testid="stSidebar"] .stSlider [data-baseweb="slider"] div[role="slider"] {
-    background: var(--lime) !important;
+[data-testid="stSidebar"] hr { border-color: var(--border) !important; }
+[data-testid="stSidebar"] p, [data-testid="stSidebar"] small { color: var(--text-dim) !important; font-size: 0.78rem !important; }
+
+/* ── Sidebar brand ── */
+.rb-brand {
+    display: flex; align-items: center; gap: 12px; padding: 0.25rem 0 1.25rem;
 }
-[data-testid="stSidebar"] hr {
-    border-color: var(--border) !important;
+.rb-logo {
+    width: 38px; height: 38px; background: var(--lime);
+    border-radius: 7px; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 14px;
+    color: #fff; flex-shrink: 0; letter-spacing: -0.5px;
+}
+.rb-brand-text-top {
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--lime) !important; line-height: 1;
+}
+.rb-brand-text-bot {
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-dim) !important; margin-top: 3px;
 }
 
-/* ── Sidebar brand mark ── */
-.rb-sidebar-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0.25rem 0 1rem;
-}
-.rb-logo-mark {
-    width: 36px;
-    height: 36px;
-    background: var(--lime);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 1.2rem;
-    color: var(--forest) !important;
-    letter-spacing: -1px;
-    flex-shrink: 0;
-}
-.rb-brand-text {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-muted) !important;
-    line-height: 1.3;
-}
-
-/* ── Main header ── */
+/* ── Header ── */
 .esg-header {
-    background: var(--forest);
+    background: var(--bg-surface);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--lime);
-    border-radius: 6px;
-    padding: 2rem 2.5rem;
-    margin-bottom: 1.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-}
-.esg-header::before {
-    content: 'ESG';
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 800;
-    font-size: 6rem;
-    color: rgba(106,191,46,0.06);
-    letter-spacing: -4px;
-    pointer-events: none;
-    user-select: none;
-}
-.esg-header-left {}
-.esg-badge {
-    display: inline-block;
-    background: var(--lime);
-    color: var(--forest) !important;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.68rem;
-    padding: 0.2rem 0.65rem;
-    border-radius: 2px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
+    border-top: 2px solid var(--lime);
+    border-radius: 10px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
 }
 .esg-header h1 {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-weight: 800 !important;
-    font-size: 2.4rem !important;
-    color: var(--white) !important;
-    margin: 0 !important;
-    line-height: 1.05 !important;
-    letter-spacing: -0.5px;
-    text-transform: uppercase;
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 700 !important; font-size: 2rem !important;
+    color: var(--text-primary) !important; margin: 0 !important; line-height: 1.1 !important;
 }
-.esg-header h1 span {
-    color: var(--lime) !important;
+.esg-header h1 em { font-style: normal; color: var(--lime) !important; }
+.esg-header p { color: var(--text-sec) !important; margin: 0.35rem 0 0 !important; font-size: 0.85rem !important; font-weight: 300; letter-spacing: 0.02em; }
+.esg-badge {
+    display: inline-block; background: rgba(90,181,39,0.12);
+    color: var(--lime-bright) !important; border: 1px solid rgba(90,181,39,0.25);
+    font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.6rem;
+    border-radius: 20px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.55rem;
 }
-.esg-header p {
-    color: var(--text-muted) !important;
-    margin: 0.4rem 0 0 !important;
-    font-size: 0.9rem !important;
-    font-weight: 300;
-    letter-spacing: 0.02em;
+.hdr-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.hdr-tag {
+    font-size: 0.68rem; font-weight: 500; padding: 4px 10px;
+    border-radius: 20px; letter-spacing: 0.05em; text-transform: uppercase;
 }
+.hdr-tag-e { background: rgba(90,181,39,0.1); color: var(--lime-bright) !important; border: 1px solid rgba(90,181,39,0.2); }
+.hdr-tag-s { background: rgba(96,165,250,0.1); color: #93c5fd !important; border: 1px solid rgba(96,165,250,0.2); }
+.hdr-tag-g { background: rgba(251,191,36,0.1); color: #fcd34d !important; border: 1px solid rgba(251,191,36,0.2); }
 
-/* ── Search bar ── */
+/* ── Search ── */
 .stTextInput > div > div > input {
-    font-family: 'Barlow', sans-serif !important;
-    font-size: 1rem !important;
-    background: var(--surface) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 4px !important;
-    color: var(--text-main) !important;
-    padding: 0.75rem 1rem !important;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: 8px !important;
+    color: var(--text-primary) !important;
+    font-size: 0.95rem !important;
+    padding: 0.7rem 1rem !important;
+    font-family: 'Inter', sans-serif !important;
 }
+.stTextInput > div > div > input::placeholder { color: var(--text-dim) !important; }
 .stTextInput > div > div > input:focus {
     border-color: var(--lime) !important;
-    box-shadow: 0 0 0 2px rgba(106,191,46,0.18) !important;
-}
-.stTextInput > div > div > input::placeholder {
-    color: var(--text-dim) !important;
+    box-shadow: 0 0 0 3px rgba(90,181,39,0.12) !important;
 }
 
-/* ── Primary button ── */
+/* ── Buttons ── */
 .stButton > button[kind="primary"] {
-    background: var(--lime) !important;
-    color: var(--forest) !important;
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-weight: 700 !important;
-    font-size: 0.95rem !important;
-    letter-spacing: 0.06em !important;
-    text-transform: uppercase !important;
-    border: none !important;
-    border-radius: 4px !important;
-    padding: 0.6rem 1.2rem !important;
-    transition: background 0.15s, transform 0.1s !important;
+    background: var(--lime) !important; color: #0a1a08 !important;
+    font-family: 'Inter', sans-serif !important; font-weight: 600 !important;
+    font-size: 0.85rem !important; letter-spacing: 0.04em !important;
+    border: none !important; border-radius: 8px !important;
+    transition: background 0.15s !important;
 }
-.stButton > button[kind="primary"]:hover {
-    background: var(--lime-bright) !important;
-    transform: translateY(-1px) !important;
-}
-.stButton > button {
-    background: var(--surface) !important;
-    color: var(--text-main) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 4px !important;
-    font-family: 'Barlow', sans-serif !important;
+.stButton > button[kind="primary"]:hover { background: var(--lime-bright) !important; }
+.stButton > button:not([kind="primary"]) {
+    background: var(--bg-card) !important; color: var(--text-sec) !important;
+    border: 1px solid var(--border-mid) !important; border-radius: 8px !important;
+    font-family: 'Inter', sans-serif !important;
 }
 
 /* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"] {
     background: transparent !important;
-    border-bottom: 1px solid var(--border) !important;
-    gap: 0 !important;
+    border-bottom: 1px solid var(--border) !important; gap: 0 !important;
 }
 .stTabs [data-baseweb="tab"] {
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-weight: 600 !important;
-    font-size: 0.9rem !important;
-    letter-spacing: 0.05em !important;
-    text-transform: uppercase !important;
-    color: var(--text-muted) !important;
-    padding: 0.6rem 1.4rem !important;
-    background: transparent !important;
-    border: none !important;
+    font-family: 'Inter', sans-serif !important; font-weight: 500 !important;
+    font-size: 0.82rem !important; letter-spacing: 0.04em !important;
+    color: var(--text-dim) !important; padding: 0.55rem 1.2rem !important;
+    background: transparent !important; border: none !important;
     border-bottom: 2px solid transparent !important;
 }
 .stTabs [aria-selected="true"] {
-    color: var(--lime) !important;
+    color: var(--lime-bright) !important;
     border-bottom: 2px solid var(--lime) !important;
 }
-.stTabs [data-baseweb="tab-panel"] {
-    padding-top: 1.25rem !important;
-}
-
-/* ── News card ── */
-.news-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--lime);
-    border-radius: 4px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 0.75rem;
-    transition: background 0.15s, border-color 0.15s;
-}
-.news-card:hover {
-    background: var(--card-hover);
-    border-color: var(--lime-dim);
-}
-.news-card.risk  { border-left-color: #e05c3a; }
-.news-card.neutral { border-left-color: var(--text-dim); }
-
-.news-card-title {
-    font-family: 'Barlow', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--text-main);
-    margin-bottom: 0.45rem;
-    line-height: 1.45;
-}
-.news-card-title a {
-    color: var(--text-main);
-    text-decoration: none;
-}
-.news-card-title a:hover { color: var(--lime); }
-
-.news-card-meta {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 0.55rem;
-    align-items: center;
-}
-.news-card-source {
-    background: rgba(106,191,46,0.12);
-    color: var(--lime) !important;
-    font-weight: 600;
-    padding: 0.1rem 0.5rem;
-    border-radius: 2px;
-    font-size: 0.75rem;
-    letter-spacing: 0.03em;
-}
-.news-card-summary {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-    line-height: 1.65;
-    font-weight: 300;
-}
-
-/* ── Tag pills ── */
-.tag-pill {
-    display: inline-block;
-    background: rgba(106,191,46,0.1);
-    color: var(--lime);
-    border: 1px solid rgba(106,191,46,0.25);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 0.12rem 0.5rem;
-    border-radius: 2px;
-    margin: 0.1rem;
-    text-transform: uppercase;
-}
-.tag-pill.risk {
-    background: rgba(224,92,58,0.1);
-    color: #e05c3a;
-    border-color: rgba(224,92,58,0.25);
-}
-.tag-pill.neutral {
-    background: rgba(122,153,119,0.1);
-    color: var(--text-muted);
-    border-color: rgba(122,153,119,0.2);
-}
+.stTabs [data-baseweb="tab-panel"] { padding-top: 1.1rem !important; }
 
 /* ── Stats bar ── */
-.stats-bar {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
+.stats-bar { display: flex; gap: 1px; background: var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 1.25rem; }
+.stat-chip { flex: 1; background: var(--bg-surface); padding: 0.85rem 1rem; }
+.stat-num {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 1.5rem; color: var(--lime-bright); line-height: 1;
 }
-.stat-chip {
-    background: var(--card);
+.stat-num.risk { color: var(--risk-text); }
+.stat-lbl { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+
+/* ── Cards ── */
+.news-card {
+    background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 0.6rem 1.1rem;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    font-weight: 400;
+    border-left: 3px solid var(--lime);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.65rem;
+    transition: background 0.12s, border-color 0.12s;
 }
-.stat-chip span {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    color: var(--lime);
-    font-size: 1.15rem;
-    margin-right: 0.3rem;
+.news-card:hover { background: var(--bg-card-hov); }
+.news-card.risk { border-left-color: var(--risk); }
+.news-card.neutral { border-left-color: var(--border-mid); }
+
+.news-card-source {
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.09em;
+    text-transform: uppercase; color: var(--lime); margin-bottom: 5px;
 }
+.news-card.risk .news-card-source { color: var(--risk-text); }
+
+.news-card-title {
+    font-size: 0.92rem; font-weight: 500; color: var(--text-primary);
+    line-height: 1.55; margin-bottom: 0.55rem;
+}
+.news-card-title a { color: var(--text-primary); text-decoration: none; }
+.news-card-title a:hover { color: var(--lime-bright); }
+
+.news-card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 0.75rem; color: var(--text-dim); }
+
+.tag-pill {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 4px;
+    background: rgba(90,181,39,0.1); color: var(--lime-bright);
+    border: 1px solid rgba(90,181,39,0.2);
+}
+.tag-pill.risk { background: var(--risk-bg); color: var(--risk-text); border-color: var(--risk-border); }
+.tag-pill.neutral { background: var(--text-faint); color: var(--text-dim); border-color: var(--border); }
 
 /* ── Section title ── */
 .section-title {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin: 1.25rem 0 0.9rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border);
+    font-family: 'Inter', sans-serif; font-weight: 500; font-size: 0.78rem;
+    color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;
+    margin: 1rem 0 0.8rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
 }
 
 /* ── Empty state ── */
-.empty-state {
-    text-align: center;
-    padding: 4rem 1rem;
-    color: var(--text-dim);
-}
-.empty-state .icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5; }
-.empty-state p { color: var(--text-muted) !important; }
+.empty-state { text-align: center; padding: 4rem 1rem; }
+.empty-state .icon { font-size: 2rem; margin-bottom: 0.75rem; opacity: 0.3; }
+.empty-state p { color: var(--text-dim) !important; font-size: 0.9rem !important; }
+.empty-state .title { font-family: 'Playfair Display', serif; font-size: 1.2rem !important; color: var(--text-sec) !important; font-weight: 600; }
 
 /* ── Download button ── */
 .stDownloadButton > button {
-    background: var(--lime) !important;
-    color: var(--forest) !important;
-    font-family: 'Barlow Condensed', sans-serif !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.06em !important;
-    text-transform: uppercase !important;
-    border: none !important;
-    border-radius: 4px !important;
+    background: var(--lime) !important; color: #0a1a08 !important;
+    font-family: 'Inter', sans-serif !important; font-weight: 600 !important;
+    border: none !important; border-radius: 8px !important;
 }
-
-/* ── Dataframe ── */
-.stDataFrame { border: 1px solid var(--border) !important; border-radius: 4px; }
-
-/* ── Warning / info ── */
-.stAlert { border-radius: 4px !important; }
+.stDataFrame { background: var(--bg-surface) !important; border: 1px solid var(--border) !important; border-radius: 8px !important; }
+.stAlert { border-radius: 8px !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -505,11 +351,14 @@ def deduplicate(articles: list[dict]) -> list[dict]:
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
-    <div class="rb-sidebar-brand">
-      <div class="rb-logo-mark">RB</div>
-      <div class="rb-brand-text">RB Asset<br>ESG Intelligence</div>
+    <div class="rb-brand">
+      <div class="rb-logo">RB</div>
+      <div>
+        <div class="rb-brand-text-top">RB Asset</div>
+        <div class="rb-brand-text-bot">ESG News Radar</div>
+      </div>
     </div>
-    <hr style="border-color:#243d21; margin: 0 0 1rem;">
+    <hr style="border-color:#1e3320; margin: 0 0 1rem;">
     """, unsafe_allow_html=True)
 
     st.markdown("#### 🔑 Configuração de API")
@@ -567,10 +416,15 @@ with st.sidebar:
 # ── Main ───────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="esg-header">
-  <div class="esg-header-left">
+  <div>
     <div class="esg-badge">RB Asset · ESG Intelligence</div>
-    <h1>News <span>Radar</span></h1>
+    <h1>News <em>Radar</em></h1>
     <p>Monitoramento de notícias ESG para análise de empresas parceiras</p>
+  </div>
+  <div class="hdr-tags">
+    <span class="hdr-tag hdr-tag-e">Ambiental</span>
+    <span class="hdr-tag hdr-tag-s">Social</span>
+    <span class="hdr-tag hdr-tag-g">Governança</span>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -652,10 +506,10 @@ if search_clicked and company.strip():
 
     st.markdown(f"""
     <div class="stats-bar">
-      <div class="stat-chip"><span>{len(articles)}</span> notícias encontradas</div>
-      <div class="stat-chip"><span>{n_risk}</span> alertas de risco</div>
-      <div class="stat-chip"><span>{n_positive}</span> positivas</div>
-      <div class="stat-chip"><span>{n_neutral}</span> neutras</div>
+      <div class="stat-chip"><div class="stat-num">{len(articles)}</div><div class="stat-lbl">Encontradas</div></div>
+      <div class="stat-chip"><div class="stat-num risk">{n_risk}</div><div class="stat-lbl">Alertas de risco</div></div>
+      <div class="stat-chip"><div class="stat-num">{n_positive}</div><div class="stat-lbl">Positivas</div></div>
+      <div class="stat-chip"><div class="stat-num">{n_neutral}</div><div class="stat-lbl">Neutras</div></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -682,13 +536,14 @@ if search_clicked and company.strip():
 
             st.markdown(f"""
             <div class="{card_class}">
+              <div class="news-card-source">{a['source']}</div>
               <div class="news-card-title"><a href="{a['url']}" target="_blank">{a['title']}</a></div>
               <div class="news-card-meta">
-                <span class="news-card-source">{a['source']}</span>
                 <span>{pub_str}</span>
+                <span>·</span>
                 <span>{a['origin']}</span>
+                <span style="margin-left:4px">{tags_html}</span>
               </div>
-              <div style="margin-bottom:0.5rem">{tags_html}</div>
               <div class="news-card-summary">{summary}</div>
             </div>
             """, unsafe_allow_html=True)
@@ -731,7 +586,7 @@ else:
     st.markdown("""
     <div class="empty-state">
       <div class="icon">◎</div>
-      <p style="font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6abf2e;">ESG News Radar</p>
+      <p class="title">ESG News Radar</p>
       <p>Digite o nome de uma empresa parceira e clique em <strong>Buscar</strong><br>para iniciar o monitoramento de notícias ESG.</p>
     </div>
     """, unsafe_allow_html=True)
