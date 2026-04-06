@@ -16,216 +16,382 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Custom CSS ─────────────────────────────────────────────────────────────────
+# ── Custom CSS — RB Asset Visual Identity ──────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Barlow+Condensed:wght@600;700;800&display=swap');
 
 :root {
-    --green-dark:   #0d3b2e;
-    --green-mid:    #1a6b4a;
-    --green-accent: #2dce89;
-    --green-light:  #b7f5d8;
-    --sand:         #f5f0e8;
-    --charcoal:     #1c1c1e;
-    --muted:        #6b7280;
-    --card-bg:      #ffffff;
-    --border:       #e5e7eb;
+    --forest:      #152a13;
+    --forest-mid:  #1e3d1b;
+    --lime:        #6abf2e;
+    --lime-bright: #7ed636;
+    --lime-dim:    #3d7019;
+    --ink:         #0b0f0a;
+    --surface:     #111a10;
+    --card:        #182616;
+    --card-hover:  #1f3320;
+    --border:      #243d21;
+    --text-main:   #e8f0e6;
+    --text-muted:  #7a9977;
+    --text-dim:    #4a6647;
+    --white:       #ffffff;
 }
 
+/* ── Global reset ── */
 html, body, [class*="css"] {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Barlow', sans-serif;
+    background-color: var(--ink) !important;
+    color: var(--text-main) !important;
+}
+
+/* ── App background ── */
+.stApp {
+    background-color: var(--ink) !important;
+}
+.block-container {
+    padding-top: 1.5rem !important;
+    max-width: 1100px;
 }
 
 /* ── Sidebar ── */
 [data-testid="stSidebar"] {
-    background: var(--green-dark) !important;
-    border-right: none;
+    background: var(--forest) !important;
+    border-right: 1px solid var(--border) !important;
 }
 [data-testid="stSidebar"] * {
-    color: #e8f5ee !important;
+    color: var(--text-main) !important;
 }
-[data-testid="stSidebar"] .stSelectbox label,
-[data-testid="stSidebar"] .stMultiSelect label,
-[data-testid="stSidebar"] .stSlider label,
-[data-testid="stSidebar"] h1, h2, h3 {
-    color: var(--green-light) !important;
-    font-family: 'Syne', sans-serif;
+[data-testid="stSidebar"] .stTextInput > div > div > input {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-main) !important;
+    border-radius: 4px !important;
 }
 [data-testid="stSidebar"] .stSelectbox > div > div,
 [data-testid="stSidebar"] .stMultiSelect > div > div {
-    background: rgba(255,255,255,0.08) !important;
-    border: 1px solid rgba(45,206,137,0.3) !important;
-    color: white !important;
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-main) !important;
+    border-radius: 4px !important;
+}
+[data-testid="stSidebar"] .stSlider [data-baseweb="slider"] div[role="slider"] {
+    background: var(--lime) !important;
+}
+[data-testid="stSidebar"] hr {
+    border-color: var(--border) !important;
 }
 
-/* ── Header ── */
-.esg-header {
-    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 100%);
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
-    margin-bottom: 1.5rem;
+/* ── Sidebar brand mark ── */
+.rb-sidebar-brand {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 10px;
+    padding: 0.25rem 0 1rem;
+}
+.rb-logo-mark {
+    width: 36px;
+    height: 36px;
+    background: var(--lime);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--forest) !important;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+}
+.rb-brand-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted) !important;
+    line-height: 1.3;
+}
+
+/* ── Main header ── */
+.esg-header {
+    background: var(--forest);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--lime);
+    border-radius: 6px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
     overflow: hidden;
 }
-.esg-header::after {
-    content: '';
+.esg-header::before {
+    content: 'ESG';
     position: absolute;
-    right: -40px; top: -40px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: rgba(45,206,137,0.15);
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 6rem;
+    color: rgba(106,191,46,0.06);
+    letter-spacing: -4px;
+    pointer-events: none;
+    user-select: none;
+}
+.esg-header-left {}
+.esg-badge {
+    display: inline-block;
+    background: var(--lime);
+    color: var(--forest) !important;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.68rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
 }
 .esg-header h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 2.2rem;
-    color: #ffffff !important;
-    margin: 0;
-    line-height: 1.1;
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 800 !important;
+    font-size: 2.4rem !important;
+    color: var(--white) !important;
+    margin: 0 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+.esg-header h1 span {
+    color: var(--lime) !important;
 }
 .esg-header p {
-    color: var(--green-light) !important;
-    margin: 0.3rem 0 0;
-    font-size: 1rem;
-}
-.esg-badge {
-    background: var(--green-accent);
-    color: var(--green-dark) !important;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.7rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: 20px;
-    letter-spacing: 0.05em;
+    color: var(--text-muted) !important;
+    margin: 0.4rem 0 0 !important;
+    font-size: 0.9rem !important;
+    font-weight: 300;
+    letter-spacing: 0.02em;
 }
 
 /* ── Search bar ── */
 .stTextInput > div > div > input {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1.05rem;
-    border: 2px solid var(--border) !important;
-    border-radius: 12px !important;
+    font-family: 'Barlow', sans-serif !important;
+    font-size: 1rem !important;
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    color: var(--text-main) !important;
     padding: 0.75rem 1rem !important;
-    transition: border-color 0.2s;
+    transition: border-color 0.15s, box-shadow 0.15s;
 }
 .stTextInput > div > div > input:focus {
-    border-color: var(--green-accent) !important;
-    box-shadow: 0 0 0 3px rgba(45,206,137,0.15) !important;
+    border-color: var(--lime) !important;
+    box-shadow: 0 0 0 2px rgba(106,191,46,0.18) !important;
+}
+.stTextInput > div > div > input::placeholder {
+    color: var(--text-dim) !important;
+}
+
+/* ── Primary button ── */
+.stButton > button[kind="primary"] {
+    background: var(--lime) !important;
+    color: var(--forest) !important;
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 0.6rem 1.2rem !important;
+    transition: background 0.15s, transform 0.1s !important;
+}
+.stButton > button[kind="primary"]:hover {
+    background: var(--lime-bright) !important;
+    transform: translateY(-1px) !important;
+}
+.stButton > button {
+    background: var(--surface) !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 4px !important;
+    font-family: 'Barlow', sans-serif !important;
+}
+
+/* ── Tabs ── */
+.stTabs [data-baseweb="tab-list"] {
+    background: transparent !important;
+    border-bottom: 1px solid var(--border) !important;
+    gap: 0 !important;
+}
+.stTabs [data-baseweb="tab"] {
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    color: var(--text-muted) !important;
+    padding: 0.6rem 1.4rem !important;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+}
+.stTabs [aria-selected="true"] {
+    color: var(--lime) !important;
+    border-bottom: 2px solid var(--lime) !important;
+}
+.stTabs [data-baseweb="tab-panel"] {
+    padding-top: 1.25rem !important;
 }
 
 /* ── News card ── */
 .news-card {
-    background: var(--card-bg);
+    background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-left: 3px solid var(--lime);
+    border-radius: 4px;
     padding: 1.25rem 1.5rem;
-    margin-bottom: 1rem;
-    border-left: 4px solid var(--green-accent);
-    transition: box-shadow 0.2s, transform 0.2s;
+    margin-bottom: 0.75rem;
+    transition: background 0.15s, border-color 0.15s;
 }
 .news-card:hover {
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    transform: translateY(-2px);
+    background: var(--card-hover);
+    border-color: var(--lime-dim);
 }
+.news-card.risk  { border-left-color: #e05c3a; }
+.news-card.neutral { border-left-color: var(--text-dim); }
+
 .news-card-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--charcoal);
-    margin-bottom: 0.4rem;
-    line-height: 1.4;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 0.45rem;
+    line-height: 1.45;
 }
 .news-card-title a {
-    color: var(--charcoal);
+    color: var(--text-main);
     text-decoration: none;
 }
-.news-card-title a:hover { color: var(--green-mid); }
+.news-card-title a:hover { color: var(--lime); }
+
 .news-card-meta {
     display: flex;
-    gap: 0.8rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    font-size: 0.82rem;
-    color: var(--muted);
-    margin-bottom: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.55rem;
+    align-items: center;
 }
 .news-card-source {
-    background: #f0fdf8;
-    color: var(--green-mid);
+    background: rgba(106,191,46,0.12);
+    color: var(--lime) !important;
     font-weight: 600;
-    padding: 0.15rem 0.5rem;
-    border-radius: 6px;
-    font-size: 0.78rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
 }
 .news-card-summary {
-    color: #374151;
-    font-size: 0.9rem;
-    line-height: 1.6;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    font-weight: 300;
 }
+
+/* ── Tag pills ── */
 .tag-pill {
     display: inline-block;
-    background: #f0fdf8;
-    color: var(--green-mid);
-    border: 1px solid #bbf7d0;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.15rem 0.55rem;
-    border-radius: 20px;
-    margin: 0.15rem;
+    background: rgba(106,191,46,0.1);
+    color: var(--lime);
+    border: 1px solid rgba(106,191,46,0.25);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.12rem 0.5rem;
+    border-radius: 2px;
+    margin: 0.1rem;
+    text-transform: uppercase;
 }
 .tag-pill.risk {
-    background: #fff7ed;
-    color: #c2410c;
-    border-color: #fed7aa;
+    background: rgba(224,92,58,0.1);
+    color: #e05c3a;
+    border-color: rgba(224,92,58,0.25);
 }
 .tag-pill.neutral {
-    background: #f8fafc;
-    color: #475569;
-    border-color: #cbd5e1;
+    background: rgba(122,153,119,0.1);
+    color: var(--text-muted);
+    border-color: rgba(122,153,119,0.2);
 }
 
 /* ── Stats bar ── */
 .stats-bar {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
 .stat-chip {
-    background: var(--sand);
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    color: var(--charcoal);
-    font-weight: 500;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 400;
 }
 .stat-chip span {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    color: var(--green-mid);
-    font-size: 1.1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    color: var(--lime);
+    font-size: 1.15rem;
     margin-right: 0.3rem;
 }
 
-/* ── Misc ── */
+/* ── Section title ── */
 .section-title {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--green-dark);
-    margin: 1.5rem 0 0.75rem;
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid var(--green-light);
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 1.25rem 0 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
 }
+
+/* ── Empty state ── */
 .empty-state {
     text-align: center;
-    padding: 3rem 1rem;
-    color: var(--muted);
+    padding: 4rem 1rem;
+    color: var(--text-dim);
 }
-.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+.empty-state .icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5; }
+.empty-state p { color: var(--text-muted) !important; }
+
+/* ── Download button ── */
+.stDownloadButton > button {
+    background: var(--lime) !important;
+    color: var(--forest) !important;
+    font-family: 'Barlow Condensed', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    border: none !important;
+    border-radius: 4px !important;
+}
+
+/* ── Dataframe ── */
+.stDataFrame { border: 1px solid var(--border) !important; border-radius: 4px; }
+
+/* ── Warning / info ── */
+.stAlert { border-radius: 4px !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -338,8 +504,13 @@ def deduplicate(articles: list[dict]) -> list[dict]:
 
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("### 🌿 ESG News Radar")
-    st.markdown("---")
+    st.markdown("""
+    <div class="rb-sidebar-brand">
+      <div class="rb-logo-mark">RB</div>
+      <div class="rb-brand-text">RB Asset<br>ESG Intelligence</div>
+    </div>
+    <hr style="border-color:#243d21; margin: 0 0 1rem;">
+    """, unsafe_allow_html=True)
 
     st.markdown("#### 🔑 Configuração de API")
     # Lê do Streamlit Secrets automaticamente; permite override manual
@@ -381,7 +552,7 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown("#### 📡 Fontes Ativas")
-    st.markdown(f"**{len(NEWS_SOURCES)}** fontes cadastradas")
+    st.markdown(f"**{len(NEWS_SOURCES)}** categorias · **200+** fontes")
     show_sources = st.toggle("Ver lista de fontes", False)
     if show_sources:
         for cat, srcs in NEWS_SOURCES.items():
@@ -390,16 +561,16 @@ with st.sidebar:
                 st.markdown(f"- {s}")
 
     st.markdown("---")
-    st.caption("v1.0 · Projeto ESG Interno")
+    st.caption("RB Asset Management · v1.0 · ESG Intelligence")
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="esg-header">
-  <div>
-    <div class="esg-badge">ESG INTELLIGENCE</div>
-    <h1>🌿 ESG News Radar</h1>
-    <p>Monitoramento de notícias ESG para empresas parceiras</p>
+  <div class="esg-header-left">
+    <div class="esg-badge">RB Asset · ESG Intelligence</div>
+    <h1>News <span>Radar</span></h1>
+    <p>Monitoramento de notícias ESG para análise de empresas parceiras</p>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -493,14 +664,14 @@ if search_clicked and company.strip():
 
     def render_articles(art_list):
         if not art_list:
-            st.markdown('<div class="empty-state"><div class="icon">🔎</div><p>Nenhuma notícia encontrada para este filtro.</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="empty-state"><div class="icon">◎</div><p>Nenhuma notícia encontrada para este filtro.</p></div>', unsafe_allow_html=True)
             return
         for a in art_list:
-            border_color = {
-                "risk":     "#ef4444",
-                "positive": "#2dce89",
-                "neutral":  "#94a3b8",
-            }.get(a["sentiment"], "#2dce89")
+            card_class = {
+                "risk":     "news-card risk",
+                "positive": "news-card",
+                "neutral":  "news-card neutral",
+            }.get(a["sentiment"], "news-card")
 
             pub_str = a["published"].strftime("%d/%m/%Y %H:%M") if a["published"] else "Data desconhecida"
             tags_html = "".join(
@@ -510,12 +681,12 @@ if search_clicked and company.strip():
             summary = a["summary"][:280] + ("..." if len(a["summary"]) > 280 else "")
 
             st.markdown(f"""
-            <div class="news-card" style="border-left-color: {border_color}">
+            <div class="{card_class}">
               <div class="news-card-title"><a href="{a['url']}" target="_blank">{a['title']}</a></div>
               <div class="news-card-meta">
                 <span class="news-card-source">{a['source']}</span>
-                <span>🕐 {pub_str}</span>
-                <span>🔗 {a['origin']}</span>
+                <span>{pub_str}</span>
+                <span>{a['origin']}</span>
               </div>
               <div style="margin-bottom:0.5rem">{tags_html}</div>
               <div class="news-card-summary">{summary}</div>
@@ -559,9 +730,8 @@ elif search_clicked and not company.strip():
 else:
     st.markdown("""
     <div class="empty-state">
-      <div class="icon">🌿</div>
-      <p style="font-size:1.1rem; font-weight:600; color:#1a6b4a;">Bem-vindo ao ESG News Radar</p>
-      <p>Digite o nome de uma empresa parceira e clique em <strong>Buscar</strong><br>
-         para iniciar o monitoramento de notícias ESG.</p>
+      <div class="icon">◎</div>
+      <p style="font-family:'Barlow Condensed',sans-serif; font-size:1.2rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#6abf2e;">ESG News Radar</p>
+      <p>Digite o nome de uma empresa parceira e clique em <strong>Buscar</strong><br>para iniciar o monitoramento de notícias ESG.</p>
     </div>
     """, unsafe_allow_html=True)
