@@ -367,7 +367,12 @@ if search_clicked and company.strip():
         if newsapi_key:
             arts += fetch_newsapi(full_query, newsapi_key, days_back, language, max_results)
         arts = deduplicate(arts)
-        arts.sort(key=lambda a: a["published"] or datetime.min, reverse=True)
+        def sort_key(a):
+            pub = a["published"]
+            if pub is None:
+                return datetime.min
+            return pub.replace(tzinfo=None) if pub.tzinfo else pub
+        arts.sort(key=sort_key, reverse=True)
         cutoff = datetime.utcnow() - timedelta(days=days_back)
         arts = [a for a in arts if a["published"] is None or a["published"].replace(tzinfo=None) >= cutoff]
         for a in arts:
